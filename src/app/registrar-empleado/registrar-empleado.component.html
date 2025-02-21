@@ -1,0 +1,78 @@
+<div class="col-md-6 offset-md-3">
+    <h3 class="text-center">Registro de empleado</h3>
+    <form (ngSubmit)="onSubmit()" #empleadoForm="ngForm">
+      <div class="form-group">
+        <label>Nombre :</label>
+        <input type="text" class="form-control" id="nombre" [(ngModel)]="empleado.nombre" name="nombre" required minlength="4" maxlength="10" placeholder="Digite su nombre" #nombre="ngModel" />
+        <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+          <div *ngIf="nombre.errors?.['required']">Digite su nombre por favor</div>
+          <div *ngIf="nombre.errors?.['minlength']">El nombre debe tener al menos 4 caracteres</div>
+          <div *ngIf="nombre.errors?.['maxlength']">El nombre no puede superar los 10 caracteres</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Apellido :</label>
+        <input type="text" class="form-control" id="apellido" [(ngModel)]="empleado.apellido" name="apellido" required minlength="4" maxlength="10" placeholder="Digite su apellido" #apellido="ngModel" />
+        <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+          <div *ngIf="apellido.errors?.['required']">Digite su apellido por favor</div>
+          <div *ngIf="apellido.errors?.['minlength']">El apellido debe tener al menos 4 caracteres</div>
+          <div *ngIf="apellido.errors?.['maxlength']">El apellido no puede superar los 10 caracteres</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Tipo de Identificación :</label>
+        <select class="form-control" [(ngModel)]="empleado.tipoIdentificacion" name="tipoIdentificacion" required #tipoIdentificacion="ngModel">
+          <option value="">Seleccione...</option>
+          <option value="CC">Cédula de Ciudadanía</option>
+          <option value="TI">Tarjeta de Identidad</option>
+          <option value="CE">Cédula de Extranjería</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="tipoIdentificacion.invalid && (tipoIdentificacion.dirty || tipoIdentificacion.touched)">
+          <div *ngIf="tipoIdentificacion.errors?.['required']">Seleccione un tipo de identificación</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Número de Identificación :</label>
+        <input type="text" class="form-control" id="numeroIdentificacion" [(ngModel)]="empleado.numeroIdentificacion" name="numeroIdentificacion" required pattern="^[0-9]{5,15}$" placeholder="Digite su número de identificación" #numeroIdentificacion="ngModel" />
+        <div class="alert alert-danger" *ngIf="numeroIdentificacion.invalid && (numeroIdentificacion.dirty || numeroIdentificacion.touched)">
+          <div *ngIf="numeroIdentificacion.errors?.['required']">Digite su número de identificación</div>
+          <div *ngIf="numeroIdentificacion.errors?.['pattern']">El número debe contener entre 5 y 15 dígitos</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Dirección :</label>
+        <input type="text" class="form-control" id="direccion" [(ngModel)]="empleado.direccion" name="direccion" required placeholder="Digite su dirección" #direccion="ngModel" />
+        <div class="alert alert-danger" *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)">
+          <div *ngIf="direccion.errors?.['required']">Digite su dirección</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Metodo de Pago :</label>
+        <select class="form-control" [(ngModel)]="empleado.metodoDePago" name="metodoDePago" required #metodoPago="ngModel">
+          <option value="">Seleccione...</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Transferencia">Transferencia Bancaria</option>
+          <option value="Tarjeta">Tarjeta de Crédito/Débito</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="metodoPago.invalid && (metodoPago.dirty || metodoPago.touched)">
+          <div *ngIf="metodoPago.errors?.['required']">Seleccione un método de pago</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Email :</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="empleado.email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required placeholder="Digite su email" #email="ngModel" />
+        <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <div *ngIf="email.errors?.['required']">Digite su email por favor</div>
+          <div *ngIf="email.errors?.['pattern']">Formato incorrecto (ej: user100@gmail.com)</div>
+        </div>
+      </div>
+      
+      <button class="btn btn-success" [disabled]="!empleadoForm.form.valid">Guardar</button>
+    </form>
+</div>
